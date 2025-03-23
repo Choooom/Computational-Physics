@@ -1,1 +1,1 @@
-﻿LINK : fatal error LNK1168: cannot open C:\Users\romil\Desktop\Computational Physics\Physics Program\x64\Debug\Physics Program.exe for writing
+﻿LINK : fatal error LNK1104: cannot open file 'C:\Users\romil\Desktop\Computational Physics\Physics Program\x64\Debug\Physics Program.exe'

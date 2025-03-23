@@ -10,6 +10,7 @@
 #include <limits>
 #include <cmath>
 #include "ConsoleUtils.h"
+#include "Vectors.h"
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
@@ -22,6 +23,15 @@
 #endif
 
 using namespace std;
+
+void clearScreen() {
+    for (int i = 4; i <= 18; i++) {
+        for (int j = 35; j <= 83; j++) {
+            setCursorPosition(j, i);
+            cout << " ";
+        }
+    }
+}
 
 int main()
 {
@@ -98,8 +108,81 @@ int main()
     setCursorPosition(43, 7);
     cout << YELLOW << "WELCOME TO ILAIDA's COPH PROGRAM" << RESET;
 
-    setCursorPosition(35, 12);
-    cout << YELLOW << "Press anything to continue..." << RESET;
+    setCursorPosition(36, 12);
+    cout << GREEN << "Press any key continue..." << RESET;
+
+    cin.get();
+
+    bool isExit = false;
+
+    clearScreen();
+
+    while (!isExit) {
+        clearScreen();
+
+        vector<string> arr = {"Lab 1: Measurements", "Lab 2: Vectors", "Lab 3: Kinematics"};
+
+        string topic;
+
+        for (int i = 0; i <= arr.size(); i++) {
+            if (i == arr.size()) {
+                setCursorPosition(40, 8 + i);
+                cout << RED << "EXIT";
+                continue;
+            }
+            setCursorPosition(40, 6+i);
+            cout << YELLOW << arr[i] << RESET;
+        }
+
+        setCursorPosition(36, 15);
+        cout << YELLOW << "Choose which topic to go into: " << GREEN;
+        getline(cin, topic);
+
+        transform(topic.begin(), topic.end(), topic.begin(), ::tolower);
+
+        vector<string> lab1 = {"lab1", "lab 1", "laboratory1", "laboratory 1", "measurement", "measurements", "lab1: measurement", "lab 1: measurement", "laboratory1: measurements", "laboratory 1: measurements"};
+        vector<string> lab2 = { "lab2", "lab 2", "laboratory2", "laboratory 2", "vector", "vectors", "lab2: vector", "lab 2: vectors", "laboratory 2: vector", "laboratory 2: vectors" };
+        vector<string> lab3 = { "lab3", "lab 3", "laboratory3", "laboratory 3", "kinematic", "kinematics", "lab3: kinematic", "lab 3: kinematics", "laboratory 3: kinematic", "laboratory 3: kinematics" };
+
+        if (find(lab1.begin(), lab1.end(), topic) != lab1.end()) {
+            clearScreen();
+
+            setCursorPosition(35, 7);
+            cout << GREEN << "Laboratory 1: Measurement";
+            cin.get();
+        }
+        else if (find(lab2.begin(), lab2.end(), topic) != lab2.end()) {
+            clearScreen();
+
+            Vectors vectorCalculator;
+
+            vectorCalculator.runVectorsCalculator();
+
+            cin.get();
+        }
+        else if (find(lab3.begin(), lab3.end(), topic) != lab3.end()) {
+            clearScreen();
+
+            setCursorPosition(35, 7);
+            cout << GREEN << "Laboratory 3: Kinematics";
+            cin.get();
+        }
+        else if (topic == "exit") {
+            isExit = true;
+            
+            clearScreen();
+
+            setCursorPosition(54, 9);
+            cout << RED << "GAME OVER..." RESET;
+
+        }
+        else {
+            setCursorPosition(35, 15);
+            cout << RED << "Incorrect input. Please try again.";
+            cin.get();
+        }
+    }
+
 
     setCursorPosition(0, 20);
 }

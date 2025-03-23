@@ -29,5 +29,8 @@
     <ClInclude Include="ConsoleUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vectors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
