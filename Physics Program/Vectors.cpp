@@ -98,9 +98,25 @@ void Vectors::caseOne() {
         cout << YELLOW "Enter the unit (eg. m, km): " GREEN;
         getline(cin, measurement);
 
-        setCursorPosition(35, 10);
-        cout << YELLOW "Enter direction (eg. N, W, E, S): " GREEN;
-        getline(cin, direction);
+        while (true) {
+            setCursorPosition(35, 10);
+            cout << YELLOW "Enter direction (eg. N, E, S, W): " GREEN;
+            getline(cin, direction);
+            transform(direction.begin(), direction.end(), direction.begin(), ::tolower);
+            if (direction == "n" || direction == "e" || direction == "s" || direction == "w") {
+                setCursorPosition(35, 16);
+                for (int i = 0; i < 49; i++) cout << " ";
+                break;
+            }
+            else {
+                setCursorPosition(35, 16);
+                cout << RED "Invalid input. Please enter one of N, E, S, or W";
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                                 ";
+            }
+        }
 
         while (true) {
             setCursorPosition(35, 11);
@@ -108,9 +124,13 @@ void Vectors::caseOne() {
             cin >> firstMovement;
             if (cin.fail()) {
                 setCursorPosition(35, 16);
-                cout << "Invalid input. Please enter a valid number." << endl;
+                cout << RED "Invalid input. Please enter a valid number." << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                            ";
             }
             else {
                 setCursorPosition(35, 16);
@@ -125,9 +145,13 @@ void Vectors::caseOne() {
             cin >> secondMovement;
             if (cin.fail()) {
                 setCursorPosition(35, 16);
-                cout << "Invalid input. Please enter a valid number.";
+                cout << RED "Invalid input. Please enter a valid number." << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                            ";
             }
             else {
                 setCursorPosition(35, 16);
@@ -136,20 +160,28 @@ void Vectors::caseOne() {
             }
         }
 
+        transform(direction.begin(), direction.end(), direction.begin(), ::toupper);
+
         setCursorPosition(35, 14);
-        cout << YELLOW "Final displacement: " << GREEN << (firstMovement + secondMovement)
+        cout << YELLOW "Final displacement: " << GREEN;
+        setCursorPosition(35, 15);
+        cout << (firstMovement + secondMovement)
             << measurement << ", " << direction << RESET;
-        cin.get();
-        setCursorPosition(35, 16);
+
+        setCursorPosition(35, 18);
         cout << BLUE "Press any key to continue..." RESET;
         cin.get();
+        cin.get();
 
-        // Clear some lines
+        setCursorPosition(35, 18);
+        cout << "                                     ";
+
         setCursorPosition(35, 9);  for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 10); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 11); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 12); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 14); for (int i = 0; i < 45; i++) cout << " ";
+        setCursorPosition(35, 15); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(38, 6);  for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 16); for (int i = 0; i < 45; i++) cout << " ";
 
@@ -179,7 +211,11 @@ void Vectors::caseTwo() {
             }
             else {
                 setCursorPosition(35, 16);
-                cout << "Invalid input. Please enter one of N, E, S, or W.";
+                cout << RED "Invalid input. Please enter one of N, E, S, or W";
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                                 ";
             }
         }
 
@@ -189,9 +225,13 @@ void Vectors::caseTwo() {
             cin >> firstMovement;
             if (cin.fail()) {
                 setCursorPosition(35, 16);
-                cout << "Invalid input. Please enter a valid number." << endl;
+                cout << RED "Invalid input. Please enter a valid number." << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                            ";
             }
             else {
                 setCursorPosition(35, 16);
@@ -206,9 +246,13 @@ void Vectors::caseTwo() {
             cin >> secondMovement;
             if (cin.fail()) {
                 setCursorPosition(35, 16);
-                cout << "Invalid input. Please enter a valid number";
+                cout << RED "Invalid input. Please enter a valid number." << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                            ";
             }
             else {
                 setCursorPosition(35, 16);
@@ -237,19 +281,27 @@ void Vectors::caseTwo() {
         }
 
         setCursorPosition(35, 14);
-        cout << YELLOW "Final displacement: " << GREEN
+        cout << YELLOW "Final displacement: ";
+
+        transform(finalDirection.begin(), finalDirection.end(), finalDirection.begin(), ::toupper);
+
+        setCursorPosition(35, 15);
+        cout << GREEN
             << displacement << measurement << ", " << finalDirection << RESET;
-        cin.get();
-        setCursorPosition(35, 16);
+
+        setCursorPosition(35, 18);
         cout << BLUE "Press any key to continue..." RESET;
         cin.get();
 
-        // Clear lines
+        setCursorPosition(35, 18);
+        cout << "                                     ";
+
         setCursorPosition(35, 9); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 10); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 11); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 12); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 14); for (int i = 0; i < 45; i++) cout << " ";
+        setCursorPosition(35, 15); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(38, 6); for (int i = 0; i < 45; i++) cout << " ";
         setCursorPosition(35, 16); for (int i = 0; i < 45; i++) cout << " ";
 
@@ -277,7 +329,11 @@ void Vectors::caseThree() {
             }
             else {
                 setCursorPosition(35, 16);
-                cout << "Invalid input. Please enter one of N, E, S, or W.";
+                cout << RED "Invalid input. Please enter one of N, E, S, or W";
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                                 ";
             }
         }
 
@@ -287,9 +343,13 @@ void Vectors::caseThree() {
             cin >> firstMovement;
             if (cin.fail()) {
                 setCursorPosition(35, 16);
-                cout << "\nInvalid input. Please enter a valid number." << endl;
+                cout << RED "Invalid input. Please enter a valid number." << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                            ";
             }
             else {
                 setCursorPosition(35, 16);
@@ -312,12 +372,24 @@ void Vectors::caseThree() {
                     break;
                 else {
                     setCursorPosition(35, 16);
-                    cout << "Invalid combination. The second direction must be perpendicular to the first." << endl;
+                    cout << RED "Invalid combination. The second direction";
+                    setCursorPosition(35, 17);
+                    cout << "must be perpendicular to the first." RESET;
+                    cin.get();
+
+                    setCursorPosition(35, 16);
+                    cout << "                                                ";
+                    setCursorPosition(35, 17);
+                    cout << "                                                ";
                 }
             }
             else {
                 setCursorPosition(35, 16);
-                cout << "Invalid input. Please enter one of N, E, S, or W.";
+                cout << RED "Invalid input. Please enter one of N, E, S, or W";
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                                 ";
             }
         }
 
@@ -327,9 +399,13 @@ void Vectors::caseThree() {
             cin >> secondMovement;
             if (cin.fail()) {
                 setCursorPosition(35, 16);
-                cout << "\nInvalid input. Please enter a valid number." << endl;
+                cout << RED "Invalid input. Please enter a valid number." << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                cin.get();
+                setCursorPosition(35, 16);
+                cout << "                                            ";
             }
             else {
                 setCursorPosition(35, 16);
@@ -344,15 +420,18 @@ void Vectors::caseThree() {
         transform(directionOne.begin(), directionOne.end(), directionOne.begin(), ::toupper);
         transform(directionTwo.begin(), directionTwo.end(), directionTwo.begin(), ::toupper);
         setCursorPosition(35, 15);
-        cout << YELLOW "Final displacement: " << GREEN
-            << displacement << measurement << ", "
+        cout << YELLOW "Final displacement: " << GREEN;
+        setCursorPosition(38, 16);
+        cout    << displacement << measurement << ", "
             << angle << " degrees " << directionTwo << " of " << directionOne << RESET;
-        cin.get();
-        setCursorPosition(35, 16);
+        
+        setCursorPosition(35, 18);
         cout << BLUE "Press any key to continue..." RESET;
         cin.get();
 
-        // Clear lines
+        setCursorPosition(35, 18);
+        cout << "                                     ";
+
         for (int line : {9, 10, 11, 12, 13, 15, 16}) {
             setCursorPosition(35, line);
             for (int i = 0; i < 45; i++) cout << " ";
