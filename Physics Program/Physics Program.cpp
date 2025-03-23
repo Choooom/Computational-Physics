@@ -13,6 +13,7 @@
 #include "ConsoleUtils.h"
 #include "Vectors.h"
 #include "Kinematics.h"
+#include "Measurement.h";
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
@@ -140,9 +141,9 @@ int main()
         if (find(lab1.begin(), lab1.end(), topic) != lab1.end()) {
             clearScreen();
 
-            setCursorPosition(35, 7);
-            cout << GREEN << "Laboratory 1: Measurement";
-            cin.get();
+            Measurement unitConverter;
+            unitConverter.runUnitConverter();
+            
         }
         else if (find(lab2.begin(), lab2.end(), topic) != lab2.end()) {
             clearScreen();
