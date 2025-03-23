@@ -86,6 +86,11 @@ void Vectors::runVectorsCalculator() {
             cout << "                                                 ";
             caseThree();
         }
+        else if (choice == "exit") {
+            clearScreen();
+
+            break;
+        }
     }
 }
 

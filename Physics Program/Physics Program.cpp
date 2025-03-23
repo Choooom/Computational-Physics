@@ -9,8 +9,10 @@
 #include <algorithm>
 #include <limits>
 #include <cmath>
+
 #include "ConsoleUtils.h"
 #include "Vectors.h"
+#include "Kinematics.h"
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
@@ -23,15 +25,6 @@
 #endif
 
 using namespace std;
-
-void clearScreen() {
-    for (int i = 4; i <= 18; i++) {
-        for (int j = 35; j <= 83; j++) {
-            setCursorPosition(j, i);
-            cout << " ";
-        }
-    }
-}
 
 int main()
 {
@@ -158,14 +151,14 @@ int main()
 
             vectorCalculator.runVectorsCalculator();
 
-            cin.get();
         }
         else if (find(lab3.begin(), lab3.end(), topic) != lab3.end()) {
             clearScreen();
 
-            setCursorPosition(35, 7);
-            cout << GREEN << "Laboratory 3: Kinematics";
-            cin.get();
+            Kinematics kinematicsCalc;
+
+            kinematicsCalc.runKinematics();
+            
         }
         else if (topic == "exit") {
             isExit = true;
