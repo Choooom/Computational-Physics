@@ -129,12 +129,14 @@
   <ItemGroup>
     <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="Kinematics.cpp" />
+    <ClCompile Include="Measurement.cpp" />
     <ClCompile Include="Physics Program.cpp" />
     <ClCompile Include="Vectors.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleUtils.h" />
     <ClInclude Include="Kinematics.h" />
+    <ClInclude Include="Measurement.h" />
     <ClInclude Include="Vectors.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
