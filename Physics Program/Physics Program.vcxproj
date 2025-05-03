@@ -128,16 +128,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleUtils.cpp" />
+    <ClCompile Include="FrictionalForce.cpp" />
     <ClCompile Include="Kinematics.cpp" />
     <ClCompile Include="Measurement.cpp" />
+    <ClCompile Include="Momentum.cpp" />
+    <ClCompile Include="Newton.cpp" />
     <ClCompile Include="Physics Program.cpp" />
     <ClCompile Include="Vectors.cpp" />
+    <ClCompile Include="Work.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleUtils.h" />
+    <ClInclude Include="FrictionalForce.h" />
     <ClInclude Include="Kinematics.h" />
     <ClInclude Include="Measurement.h" />
+    <ClInclude Include="Momentum.h" />
+    <ClInclude Include="Newton.h" />
     <ClInclude Include="Vectors.h" />
+    <ClInclude Include="Work.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

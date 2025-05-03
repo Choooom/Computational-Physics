@@ -13,7 +13,11 @@
 #include "ConsoleUtils.h"
 #include "Vectors.h"
 #include "Kinematics.h"
-#include "Measurement.h";
+#include "Measurement.h"
+#include "FrictionalForce.h"
+#include "Work.h"
+#include "Newton.h"
+#include "Momentum.h"
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
@@ -114,7 +118,7 @@ int main()
     while (!isExit) {
         clearScreen();
 
-        vector<string> arr = {"Lab 1: Measurements", "Lab 2: Vectors", "Lab 3: Kinematics"};
+        vector<string> arr = {"Lab 1: Measurements", "Lab 2: Vectors", "Lab 3: Kinematics", "Lab 5: Frictional Force", "Lab 6: Work", "Lab 7: Apparent Weight", "Lab 8: Momentum, Impulse, & Collision"};
 
         string topic;
 
@@ -137,6 +141,10 @@ int main()
         vector<string> lab1 = {"lab1", "lab 1", "laboratory1", "laboratory 1", "measurement", "measurements", "lab1: measurement", "lab 1: measurement", "laboratory1: measurements", "laboratory 1: measurements"};
         vector<string> lab2 = { "lab2", "lab 2", "laboratory2", "laboratory 2", "vector", "vectors", "lab2: vector", "lab 2: vectors", "laboratory 2: vector", "laboratory 2: vectors" };
         vector<string> lab3 = { "lab3", "lab 3", "laboratory3", "laboratory 3", "kinematic", "kinematics", "lab3: kinematic", "lab 3: kinematics", "laboratory 3: kinematic", "laboratory 3: kinematics" };
+        vector<string> lab5 = { "lab5", "lab 5", "laboratory5", "laboratory 5", "frictional force", "lab5: frictional force", "lab 5: frictional force", "laboratory 5: frictional force"};
+        vector<string> lab6 = { "lab6", "lab 6", "laboratory6", "laboratory 6", "work", "lab6: work", "lab 6: work", "laboratory 6: work" };
+        vector<string> lab7 = { "lab7", "lab 7", "laboratory7", "laboratory 7", "newton", "lab7: newton", "lab 7: newton", "laboratory 7: newton" };
+        vector<string> lab8 = { "lab8", "lab 8", "laboratory8", "laboratory 8", "momentum", "lab8: momentum", "lab 8: momentum", "laboratory 8: momentum" };
 
         if (find(lab1.begin(), lab1.end(), topic) != lab1.end()) {
             clearScreen();
@@ -160,6 +168,38 @@ int main()
 
             kinematicsCalc.runKinematics();
             
+        }
+        else if(find(lab5.begin(), lab5.end(), topic) != lab5.end()) {
+            clearScreen();
+
+            FrictionalForce friction;
+
+            friction.runFrictionalForce();
+
+        }
+        else if (find(lab6.begin(), lab6.end(), topic) != lab6.end()) {
+            clearScreen();
+
+            Work work;
+
+            work.runWork();
+
+        }
+        else if (find(lab7.begin(), lab7.end(), topic) != lab7.end()) {
+            clearScreen();
+
+            Newton newton;
+
+            newton.runNewton();
+
+        }
+        else if (find(lab8.begin(), lab8.end(), topic) != lab8.end()) {
+            clearScreen();
+
+            Momentum momentum;
+
+            momentum.runMomentum();
+
         }
         else if (topic == "exit") {
             isExit = true;
