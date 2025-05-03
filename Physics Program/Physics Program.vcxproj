@@ -134,6 +134,7 @@
     <ClCompile Include="Momentum.cpp" />
     <ClCompile Include="Newton.cpp" />
     <ClCompile Include="Physics Program.cpp" />
+    <ClCompile Include="Temperature.cpp" />
     <ClCompile Include="Vectors.cpp" />
     <ClCompile Include="Work.cpp" />
   </ItemGroup>
@@ -144,6 +145,7 @@
     <ClInclude Include="Measurement.h" />
     <ClInclude Include="Momentum.h" />
     <ClInclude Include="Newton.h" />
+    <ClInclude Include="Temperature.h" />
     <ClInclude Include="Vectors.h" />
     <ClInclude Include="Work.h" />
   </ItemGroup>
