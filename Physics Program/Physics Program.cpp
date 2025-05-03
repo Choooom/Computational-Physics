@@ -18,6 +18,7 @@
 #include "Work.h"
 #include "Newton.h"
 #include "Momentum.h"
+#include "Temperature.h"
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
@@ -118,7 +119,7 @@ int main()
     while (!isExit) {
         clearScreen();
 
-        vector<string> arr = {"Lab 1: Measurements", "Lab 2: Vectors", "Lab 3: Kinematics", "Lab 5: Frictional Force", "Lab 6: Work", "Lab 7: Apparent Weight", "Lab 8: Momentum, Impulse, & Collision"};
+        vector<string> arr = {"Lab 1: Measurements", "Lab 2: Vectors", "Lab 3: Kinematics", "Lab 5: Frictional Force", "Lab 6: Work", "Lab 7: Apparent Weight", "Lab 8: Momentum, Impulse, & Collision", "Lab 9: Temperature"};
 
         string topic;
 
@@ -145,6 +146,7 @@ int main()
         vector<string> lab6 = { "lab6", "lab 6", "laboratory6", "laboratory 6", "work", "lab6: work", "lab 6: work", "laboratory 6: work" };
         vector<string> lab7 = { "lab7", "lab 7", "laboratory7", "laboratory 7", "newton", "lab7: newton", "lab 7: newton", "laboratory 7: newton" };
         vector<string> lab8 = { "lab8", "lab 8", "laboratory8", "laboratory 8", "momentum", "lab8: momentum", "lab 8: momentum", "laboratory 8: momentum" };
+        vector<string> lab9 = { "lab9", "lab 9", "laboratory9", "laboratory 9", "temperature", "lab9: temperature", "lab 9: temperature", "laboratory 9: temperature" };
 
         if (find(lab1.begin(), lab1.end(), topic) != lab1.end()) {
             clearScreen();
@@ -199,6 +201,14 @@ int main()
             Momentum momentum;
 
             momentum.runMomentum();
+
+        }
+        else if (find(lab9.begin(), lab9.end(), topic) != lab9.end()) {
+            clearScreen();
+
+            Temperature temperature;
+
+            temperature.runTemperature();
 
         }
         else if (topic == "exit") {
