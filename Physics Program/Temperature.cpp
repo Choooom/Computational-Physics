@@ -69,6 +69,12 @@ void Temperature::runTemperature() {
 
             break;
         }
+        else {
+            setCursorPosition(35, 16);
+            cout << RED "Invalid input. Please enter a valid number." << endl;
+            cin.get();
+            clearScreen();
+        }
     }
 
 }
@@ -79,6 +85,10 @@ void Temperature::computeCelsius() {
         double fahrenheit, celsius;
 
         while (true) {
+            clearScreen();
+            cout << RED;
+            printCentered("Fahrenheit -> Celsius", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter temperature(F): " GREEN;
             cin >> fahrenheit;
@@ -124,6 +134,10 @@ void Temperature::computeFahrenheit() {
         double celsius, fahrenheit;
 
         while (true) {
+            clearScreen();
+            cout << RED;
+            printCentered("Celsius -> Fahrenheit ", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter temperature(C): " GREEN;
             cin >> celsius;

@@ -1,6 +1,8 @@
 #include "ConsoleUtils.h"
 
 #include <iostream>
+#include <windows.h>
+#include <string>
 
 using namespace std;
 
@@ -25,4 +27,13 @@ void clearScreen() {
             cout << " ";
         }
     }
+}
+
+void printCentered(const std::string& text, int y, int consoleWidth, int xStart) {
+    int printableWidth = consoleWidth - xStart;
+    int textLength = static_cast<int>(text.length());
+    int xPosition = xStart + (printableWidth - textLength) / 2;
+
+    setCursorPosition(xPosition, y);
+    std::cout << text;
 }

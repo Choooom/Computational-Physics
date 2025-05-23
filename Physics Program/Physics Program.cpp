@@ -51,7 +51,7 @@ int main()
     cout << YELLOW "VISION        " BLUE " |" RESET;
 
     setCursorPosition(10, 6);
-    cout << GREEN "  A premiere  inclusive" BLUE " |" GREEN "\n          university   of  choice" BLUE " |" GREEN "\n          aspiring to improve man" BLUE " |" GREEN "\n          as  man  by  developing" BLUE " |" GREEN "\n          individuals  through  a" BLUE " |" GREEN "\n          legacy    of  excellent" BLUE " |" GREEN "\n          education           and" BLUE " |" GREEN "\n          compassionate     value" BLUE " |" GREEN "\n          formation.              " BLUE "|" RESET;
+    cout << GREEN " A  premiere  inclusive" BLUE " |" GREEN "\n          university   of  choice" BLUE " |" GREEN "\n          aspiring to improve man" BLUE " |" GREEN "\n          as  man  by  developing" BLUE " |" GREEN "\n          individuals  through  a" BLUE " |" GREEN "\n          legacy    of  excellent" BLUE " |" GREEN "\n          education           and" BLUE " |" GREEN "\n          compassionate     value" BLUE " |" GREEN "\n          formation.              " BLUE "|" RESET;
     setCursorPosition(34, 15); cout << BLUE "|";
     setCursorPosition(34, 16); cout << BLUE "|";
     setCursorPosition(34, 17); cout << BLUE "|";
@@ -62,7 +62,7 @@ int main()
     cout << BLUE "|" YELLOW "         MISSION" RESET;
     setCursorPosition(84, 5); cout << BLUE "|";
     setCursorPosition(84, 6);
-    cout << BLUE "|" GREEN " The Our  Lady of Fatima";
+    cout << BLUE "|" GREEN "  The Our Lady of Fatima";
     setCursorPosition(84, 7);
     cout << BLUE "|" GREEN " University,    together";
     setCursorPosition(84, 8);
@@ -125,8 +125,8 @@ int main()
 
         for (int i = 0; i <= arr.size(); i++) {
             if (i == arr.size()) {
-                setCursorPosition(40, 8 + i);
-                cout << RED << "EXIT";
+                setCursorPosition(40, 9 + i);
+                cout << BLUE << "Type " << RED << "\"EXIT\"" << BLUE << " to terminate the program.";
                 continue;
             }
             setCursorPosition(40, 6+i);
@@ -152,7 +152,7 @@ int main()
             clearScreen();
 
             Measurement unitConverter;
-            unitConverter.runUnitConverter();
+            unitConverter.mainMenu();
             
         }
         else if (find(lab2.begin(), lab2.end(), topic) != lab2.end()) {

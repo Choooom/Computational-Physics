@@ -111,6 +111,16 @@ void Momentum::runMomentum() {
 
             Recoil();
         }
+        else if (choice == "exit") {
+            clearScreen();
+            break;
+        }
+        else {
+            setCursorPosition(35, 16);
+            cout << RED "Invalid input. Please enter a valid number." << endl;
+            cin.get();
+            clearScreen();
+        }
     }
 
 }
@@ -121,6 +131,10 @@ void Momentum::Momentums() {
         double mass, velocity, momentum;
 
         while (true) {
+            clearScreen();
+            cout << RED;
+            printCentered("Momentum", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter mass(kg): " GREEN;
             cin >> mass;
@@ -187,6 +201,10 @@ void Momentum::Impulse() {
         double force, time, impulse;
 
         while (true) {
+            clearScreen();
+            cout << RED;
+            printCentered("Impulse", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter force(N): " GREEN;
             cin >> force;
@@ -253,6 +271,10 @@ void Momentum::Impulse_Momentum() {
         double initial_momentum, final_momentum, impulse;
 
         while (true) {
+            clearScreen();
+            cout << RED;
+            printCentered("Impulse (Pi & Pf)", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter initilial momentum: " GREEN;
             cin >> initial_momentum;
@@ -319,6 +341,10 @@ void Momentum::Recoil() {
         double mass1, mass2, velocity1, recoil;
 
         while (true) {
+            clearScreen();
+            cout << RED;
+            printCentered("Recoil", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter first mass: " GREEN;
             cin >> mass1;
@@ -406,6 +432,10 @@ void Momentum::Inellastic() {
         double mass1, mass2, initial_velocity1, initial_velocity2, final_velocity, answer;
 
         while (true) {
+            clearScreen();
+            cout << RED;
+            printCentered("Inellastic Collision", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter first mass(kg): " GREEN;
             cin >> mass1;

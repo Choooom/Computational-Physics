@@ -28,8 +28,9 @@ Work::Work() {
 void Work::runWork() {
 
     while (true) {
-        setCursorPosition(52, 4);
-        cout << RED "WORK" RESET;
+        cout << RED;
+        printCentered("Work", 5);
+        cout << YELLOW;
 
         vector<string> arr = { "1.) Work", "2.) Distance", "3.) Work with Angle"};
         string choice;
@@ -64,6 +65,16 @@ void Work::runWork() {
 
             Angle();
         }
+        else if (choice == "exit") {
+            clearScreen();
+            break;
+        }
+        else {
+            setCursorPosition(35, 16);
+            cout << RED "Invalid input. Please enter a valid number." << endl;
+            cin.get();
+            clearScreen();
+        }
     }
 
 }
@@ -74,6 +85,9 @@ void Work::Works() {
         double force, distance, work;
 
         while (true) {
+            cout << RED;
+            printCentered("Work", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter Force(N): " GREEN;
             cin >> force;
@@ -140,6 +154,9 @@ void Work::Distance() {
         double force, distance, work;
 
         while (true) {
+            cout << RED;
+            printCentered("Distance", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter Force(N): " GREEN;
             cin >> force;
@@ -207,6 +224,9 @@ void Work::Angle() {
         double M_PI = 3.14159265358979323846;
 
         while (true) {
+            cout << RED;
+            printCentered("With Angle", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter mass(kg): " GREEN;
             cin >> mass;

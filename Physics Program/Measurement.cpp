@@ -24,89 +24,172 @@ Measurement::Measurement() {
 
 }
 
-int mainMenu() {
-    setCursorPosition(25, 5);
-    cout << YELLOW "Length    Temp    Area   Volume    Weight    Time";
-    setCursorPosition(25, 6);
-    cout << GREEN "  1.       2.      3.      4.        5.       6.";
+void Measurement::mainMenu() {
+    while (true) {
+        clearScreen();
 
-    bool goForward = false;
-    while (!goForward) {
-        setCursorPosition(25, 14);
+        // Frame and Title
+        setCursorPosition(52, 4);
+        cout << RED "UNIT CONVERTER" RESET;
+
+        for (int i = 1; i <= 19; i++) {
+            setCursorPosition(9, i);
+            cout << BLUE "|";
+            setCursorPosition(109, i);
+            cout << BLUE "|" RESET;
+        }
+
+        setCursorPosition(10, 19);
+        for (int i = 0; i < 100; i++) {
+            cout << BLUE "=" RESET;
+        }
+
+        // Unit types and options
+        setCursorPosition(39, 6);
+        cout << YELLOW "Length  Temp  Area  Volume   Weight  Time";
+        setCursorPosition(39, 7);
+        cout << GREEN  "  1.     2.    3.     4.       5.     6.";
+
+        // Input prompt
+        setCursorPosition(36, 14);
         cout << YELLOW "Choose a unit from the choices above: " GREEN;
-        setCursorPosition(63, 14);
-        cout << "       ";
-        setCursorPosition(63, 14);
-        int choice;
-        cin >> choice;
+
+        string input;
+        getline(cin, input);
         cout << RESET;
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            setCursorPosition(25, 15);
-            cout << RED "Invalid input. Please enter a number." RESET;
-            Sleep(3000);
-            setCursorPosition(25, 15);
-            cout << "                                            ";
+
+        transform(input.begin(), input.end(), input.begin(), ::tolower);
+
+        if (input == "0" || input == "exit") {
+            clearScreen();
+            break;
+        }
+
+        if (input == "1" || input == "length") {
+            clearScreen();
+            length();
+        }
+        else if (input == "2" || input == "temp" || input == "temperature") {
+            clearScreen();
+            temperature();
+        }
+        else if (input == "3" || input == "area") {
+            clearScreen();
+            area();
+        }
+        else if (input == "4" || input == "volume") {
+            clearScreen();
+            volume();
+        }
+        else if (input == "5" || input == "weight") {
+            clearScreen();
+            weight();
+        }
+        else if (input == "6" || input == "time") {
+            clearScreen();
+            timeConv();
+        }
+        else if (input == "exit") {
+            clearScreen();
+            break;
         }
         else {
-            switch (choice) {
-            case 0:
-                goForward = true;
-                continue;
-            case 1:
-                return 1;
-            case 2:
-                return 2;
-            case 3:
-                return 3;
-            case 4:
-                return 4;
-            case 5:
-                return 5;
-            case 6:
-                return 6;
-            default:
-                setCursorPosition(25, 15);
-                cout << RED "Invalid input. Choices are only 1-6." RESET;
-                Sleep(3000);
-                choice = 0;
-                setCursorPosition(25, 15);
-                cout << "                                       ";
-                break;
-            }
+            setCursorPosition(36, 16);
+            cout << RED "Invalid choice. Please try again." RESET;
+            cin.get(); 
+            clearScreen();
         }
     }
-    return 0;
 }
 
-double meterToKilometerConverter(double amount, bool toKilo) {
-    return toKilo ? amount / 1000 : amount * 1000;
+// Sqr. Meter <-> Others
+
+double Measurement::sqmToSqkm(double sqm) {
+    return sqm / 1'000'000.0;  // 1 sqkm = 1,000,000 sqm
 }
 
-double meterToCentimeterConverter(double amount, bool toCenti) {
-    return toCenti ? amount * 100 : amount / 100;
+double Measurement::sqkmToSqm(double sqkm) {
+    return sqkm * 1'000'000.0;
 }
 
-double meterToMillimeterConverter(double amount, bool toMilli) {
-    return toMilli ? amount * 1000 : amount / 1000;
+double Measurement::sqmToSqmi(double sqm) {
+    return sqm / 2'589'988.11;  // 1 sqmi = 2,589,988.11 sqm
 }
 
-double meterToMileConverter(double amount, bool toMile) {
-    return toMile ? amount * 0.0006213712 : amount * 1609.344;
+double Measurement::sqmiToSqm(double sqmi) {
+    return sqmi * 2'589'988.11;
 }
 
-double meterToYardConverter(double amount, bool toYard) {
-    return toYard ? amount * 1.0936132983 : amount * 0.9144;
+double Measurement::sqmToSqft(double sqm) {
+    return sqm * 10.7639;  // 1 sqm = 10.7639 sqft
 }
 
-double meterToFootConverter(double amount, bool toFoot) {
-    return toFoot ? amount * 3.280839895 : amount * 0.3048;
+double Measurement::sqftToSqm(double sqft) {
+    return sqft / 10.7639;
 }
 
-double meterToInchConverter(double amount, bool toInch) {
-    return toInch ? amount * 39.3700787402 : amount * 0.0254;
+double Measurement::sqmToAcre(double sqm) {
+    return sqm / 4046.8564224;  // 1 acre = 4046.8564224 sqm
 }
+
+double Measurement::acreToSqm(double acre) {
+    return acre * 4046.8564224;
+}
+
+// Sqr. Kilometer <-> Others (besides sqm which is above)
+
+double Measurement::sqkmToSqmi(double sqkm) {
+    return sqkm / 2.58999;  // 1 sqmi = 2.58999 sqkm
+}
+
+double Measurement::sqmiToSqkm(double sqmi) {
+    return sqmi * 2.58999;
+}
+
+double Measurement::sqkmToSqft(double sqkm) {
+    return sqkm * 10'763'910.42;  // 1 sqkm = 10,763,910.42 sqft
+}
+
+double Measurement::sqftToSqkm(double sqft) {
+    return sqft / 10'763'910.42;
+}
+
+double Measurement::sqkmToAcre(double sqkm) {
+    return sqkm * 247.105;  // 1 sqkm = 247.105 acres
+}
+
+double Measurement::acreToSqkm(double acre) {
+    return acre / 247.105;
+}
+
+// Sqr. Mile <-> Others (besides sqm and sqkm)
+
+double Measurement::sqmiToSqft(double sqmi) {
+    return sqmi * 27'878'400;  // 1 sqmi = 27,878,400 sqft
+}
+
+double Measurement::sqftToSqmi(double sqft) {
+    return sqft / 27'878'400;
+}
+
+double Measurement::sqmiToAcre(double sqmi) {
+    return sqmi * 640;  // 1 sqmi = 640 acres
+}
+
+double Measurement::acreToSqmi(double acre) {
+    return acre / 640;
+}
+
+// Sqr. Foot <-> Acres
+
+double Measurement::sqftToAcre(double sqft) {
+    return sqft / 43'560;  // 1 acre = 43,560 sqft
+}
+
+double Measurement::acreToSqft(double acre) {
+    return acre * 43'560;
+}
+
 
 double celsiusFahrenheitConverter(double amount, bool toFahrenheit) {
     if (toFahrenheit)
@@ -127,97 +210,6 @@ double fahrenheitKelvinConverter(double amount, bool toKelvin) {
         return (amount - 32) * 5.0 / 9.0 + 273.15;
     else
         return (amount - 273.15) * 9.0 / 5.0 + 32;
-}
-
-double sqmToSqkmConverter(double amount, bool toSqkm) {
-    if (toSqkm)
-        return amount / 1e6;
-    else
-        return amount * 1e6;
-}
-
-double sqmToSqmileConverter(double amount, bool toSqmile) {
-    if (toSqmile)
-        return amount / 2589988.11;
-    else
-        return amount * 2589988.11;
-}
-
-double sqmToSqfootConverter(double amount, bool toSqfoot) {
-    if (toSqfoot)
-        return amount / 0.092903;
-    else
-        return amount * 0.092903;
-}
-
-double sqmToAcreConverter(double amount, bool toAcre) {
-    if (toAcre)
-        return amount / 4046.8564224;
-    else
-        return amount * 4046.8564224;
-}
-
-double m3ToKm3Converter(double amount, bool toKm3) {
-    if (toKm3)
-        return amount / 1e9;
-    else
-        return amount * 1e9;
-}
-
-double m3ToLiterConverter(double amount, bool toLiter) {
-    if (toLiter)
-        return amount * 1000;   
-    else
-        return amount / 1000;
-}
-
-double m3ToMilliliterConverter(double amount, bool toMilliliter) {
-    if (toMilliliter)
-        return amount * 1e6;    
-    else
-        return amount / 1e6;
-}
-
-double m3ToUSGallonConverter(double amount, bool toGallon) {
-    if (toGallon)
-        return amount / 0.003785411784;
-    else
-        return amount * 0.003785411784;
-}
-
-double m3ToUSPintConverter(double amount, bool toPint) {
-    if (toPint)
-        return amount / 0.000473176473;
-    else
-        return amount * 0.000473176473;
-}
-
-double kgToGramConverter(double amount, bool toGram) {
-    if (toGram)
-        return amount * 1000;
-    else
-        return amount / 1000;
-}
-
-double kgToMilligramConverter(double amount, bool toMilligram) {
-    if (toMilligram)
-        return amount * 1e6;
-    else
-        return amount / 1e6;
-}
-
-double kgToPoundConverter(double amount, bool toPound) {
-    if (toPound)
-        return amount * 2.20462262185;
-    else
-        return amount / 2.20462262185;
-}
-
-double kgToOunceConverter(double amount, bool toOunce) {
-    if (toOunce)
-        return amount * 35.2739619496;
-    else
-        return amount / 35.2739619496;
 }
 
 double secToMinConverter(double amount, bool toMin) {
@@ -241,559 +233,775 @@ double secToDayConverter(double amount, bool toDay) {
         return amount * 86400;
 }
 
-void length() {
-    
-    for (int i = 0; i < 49; i++) {
-        setCursorPosition(25 + i, 5); cout << " ";
-        setCursorPosition(25 + i, 6); cout << " ";
-    }
-    setCursorPosition(47, 5);
-    cout << YELLOW "Length";
-    setCursorPosition(25, 14);
-    cout << "                                          ";
+double minToHourConverter(double value, bool minToHr) {
+    return minToHr ? value / 60.0 : value * 60.0;
+}
 
-    vector<string> arr = { "Meter", "Kilometer", "Centimeter", "Millimeter", "Mile", "Yard", "Foot", "Inch" };
-    int columns = 4, rows = 2, startX = 25, startY = 7, spacing = 12;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-            int index = i * columns + j;
-            if (index < arr.size()) {
-                setCursorPosition(startX + j * spacing, startY + i);
-                cout << arr[index];
+double minToDayConverter(double value, bool minToDay) {
+    return minToDay ? value / 1440.0 : value * 1440.0;  // 1440 min = 1 day
+}
+
+double hourToDayConverter(double value, bool hrToDay) {
+    return hrToDay ? value / 24.0 : value * 24.0;
+}
+
+
+double Measurement::toLiters(double amount, const std::string& fromUnit) {
+    if (fromUnit == "cubic meter" || fromUnit == "m3") {
+        return amount * 1000.0;
+    }
+    else if (fromUnit == "cubic kilometer" || fromUnit == "km3") {
+        return amount * 1e12; // 1 km^3 = 1e12 liters
+    }
+    else if (fromUnit == "liter" || fromUnit == "l") {
+        return amount;
+    }
+    else if (fromUnit == "milliliter" || fromUnit == "ml") {
+        return amount / 1000.0;
+    }
+    else if (fromUnit == "us gallon" || fromUnit == "gallon") {
+        return amount * 3.78541;
+    }
+    else if (fromUnit == "us pint" || fromUnit == "pint") {
+        return amount * 0.473176;
+    }
+    else {
+        return -1; // invalid unit
+    }
+}
+
+double Measurement::fromLiters(double liters, const std::string& toUnit) {
+    if (toUnit == "cubic meter" || toUnit == "m3") {
+        return liters / 1000.0;
+    }
+    else if (toUnit == "cubic kilometer" || toUnit == "km3") {
+        return liters / 1e12;
+    }
+    else if (toUnit == "liter" || toUnit == "l") {
+        return liters;
+    }
+    else if (toUnit == "milliliter" || toUnit == "ml") {
+        return liters * 1000.0;
+    }
+    else if (toUnit == "us gallon" || toUnit == "gallon") {
+        return liters / 3.78541;
+    }
+    else if (toUnit == "us pint" || toUnit == "pint") {
+        return liters / 0.473176;
+    }
+    else {
+        return -1; // invalid unit
+    }
+}
+
+double Measurement::toKilograms(double amount, const std::string& fromUnit) {
+    if (fromUnit == "kilogram" || fromUnit == "kg") {
+        return amount;
+    }
+    else if (fromUnit == "gram" || fromUnit == "g") {
+        return amount / 1000.0;
+    }
+    else if (fromUnit == "milligram" || fromUnit == "mg") {
+        return amount / 1e6;
+    }
+    else if (fromUnit == "pound" || fromUnit == "lb") {
+        return amount * 0.453592;
+    }
+    else if (fromUnit == "ounce" || fromUnit == "oz") {
+        return amount * 0.0283495;
+    }
+    else {
+        return -1; // invalid unit
+    }
+}
+
+double Measurement::fromKilograms(double kilograms, const std::string& toUnit) {
+    if (toUnit == "kilogram" || toUnit == "kg") {
+        return kilograms;
+    }
+    else if (toUnit == "gram" || toUnit == "g") {
+        return kilograms * 1000.0;
+    }
+    else if (toUnit == "milligram" || toUnit == "mg") {
+        return kilograms * 1e6;
+    }
+    else if (toUnit == "pound" || toUnit == "lb") {
+        return kilograms / 0.453592;
+    }
+    else if (toUnit == "ounce" || toUnit == "oz") {
+        return kilograms / 0.0283495;
+    }
+    else {
+        return -1; // invalid unit
+    }
+}
+
+
+void Measurement::length() {
+    // Helper lambdas inside the function or you can make them class/private functions
+    auto toMeters = [](double value, const std::string& unit) -> double {
+        if (unit == "meter" || unit == "m") return value;
+        if (unit == "kilometer" || unit == "km") return value * 1000.0;
+        if (unit == "centimeter" || unit == "cm") return value / 100.0;
+        if (unit == "millimeter" || unit == "mm") return value / 1000.0;
+        if (unit == "mile") return value * 1609.34;
+        if (unit == "yard") return value * 0.9144;
+        if (unit == "foot" || unit == "ft") return value * 0.3048;
+        if (unit == "inch" || unit == "in") return value * 0.0254;
+        return -1; // invalid unit
+        };
+
+    auto fromMeters = [](double meters, const std::string& unit) -> double {
+        if (unit == "meter" || unit == "m") return meters;
+        if (unit == "kilometer" || unit == "km") return meters / 1000.0;
+        if (unit == "centimeter" || unit == "cm") return meters * 100.0;
+        if (unit == "millimeter" || unit == "mm") return meters * 1000.0;
+        if (unit == "mile") return meters / 1609.34;
+        if (unit == "yard") return meters / 0.9144;
+        if (unit == "foot" || unit == "ft") return meters / 0.3048;
+        if (unit == "inch" || unit == "in") return meters / 0.0254;
+        return -1; // invalid unit
+        };
+
+    bool stop = false;
+    while (!stop) {
+        setCursorPosition(58, 5);
+        cout << RED;
+        printCentered("Length", 5);
+        cout << YELLOW;
+
+        vector<string> arr = { "Meter", "Kilometer", "Centimeter", "Millimeter", "Mile", "Yard", "Foot", "Inch" };
+        int columns = 4, rows = 2, startX = 36, startY = 7, spacing = 12;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                int index = i * columns + j;
+                if (index < arr.size()) {
+                    setCursorPosition(startX + j * spacing, startY + i);
+                    cout << arr[index];
+                }
             }
         }
-    }
 
-    string from, input, to;
-    bool stop = false;
-    double amount;
-    while (!stop) {
-        // Clear input area
-        for (int y = 12; y <= 17; y++) {
-            setCursorPosition(25, y);
-            cout << "                                             ";
-        }
-        setCursorPosition(25, 12);
+        string from, input, to;
+        double amount;
+
+        setCursorPosition(36, 12);
         cout << YELLOW "Enter amount: " GREEN;
         cin >> input;
         try {
             amount = stod(input);
         }
         catch (const invalid_argument& e) {
-            setCursorPosition(25, 17);
+            setCursorPosition(36, 17);
             cout << RED "Invalid input. Type a number.";
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin.get();
+            clearScreen();
             continue;
         }
-        setCursorPosition(25, 13);
+
+        setCursorPosition(36, 13);
         cout << YELLOW "Convert from (enter unit): " GREEN;
         cin >> from;
-        setCursorPosition(25, 14);
+        setCursorPosition(36, 14);
         cout << YELLOW "Convert to (enter unit): " GREEN;
         cin >> to;
+
+        // Convert input units to lowercase for matching
         transform(from.begin(), from.end(), from.begin(), ::tolower);
         transform(to.begin(), to.end(), to.begin(), ::tolower);
 
-        setCursorPosition(25, 16);
+        setCursorPosition(36, 16);
         cout << GREEN;
-        if ((from == "meter" || from == "m") &&
-            (to == "kilometer" || to == "km")) {
-            cout << amount << "m = " << fixed << setprecision(2)
-                << meterToKilometerConverter(amount, true) << "km";
-            stop = true;
-        }
-        else if ((from == "kilometer" || from == "km") &&
-            (to == "meter" || to == "m")) {
-            cout << amount << "km = " << fixed << setprecision(2)
-                << meterToKilometerConverter(amount, false) << "m";
-            stop = true;
-        }
-        // ... (other length if branches similar to your original code)
-        else {
-            setCursorPosition(25, 17);
-            cout << RED "Invalid input. Try again" RESET;
+
+        double meters = toMeters(amount, from);
+        if (meters < 0) {
+            setCursorPosition(36, 17);
+            cout << RED "Invalid 'from' unit." RESET;
             cin.get(); cin.get();
+            clearScreen();
+            continue;
         }
+
+        double result = fromMeters(meters, to);
+        if (result < 0) {
+            setCursorPosition(36, 17);
+            cout << RED "Invalid 'to' unit." RESET;
+            cin.get(); cin.get();
+            clearScreen();
+            continue;
+        }
+
+        cout << amount << " " << from << " = " << fixed << setprecision(4) << result << " " << to;
+        stop = true;
+
         if (stop) {
-            setCursorPosition(25, 17);
+            setCursorPosition(36, 17);
             cout << YELLOW "Press any key to continue...";
             cin.get(); cin.get();
         }
     }
 }
 
-void temperature() {
-    // Clear header area and display heading
-    for (int i = 0; i < 49; i++) {
-        setCursorPosition(25 + i, 5); cout << " ";
-        setCursorPosition(25 + i, 6); cout << " ";
-    }
-    setCursorPosition(47, 5);
-    cout << YELLOW "Temperature";
-    setCursorPosition(25, 14);
-    cout << "                                             ";
-
+void Measurement::temperature() {
     vector<string> arr = { "Celsius", "Fahrenheit", "Kelvin" };
-    int columns = 3, startX = 25, startY = 7, spacing = 15;
-    for (int i = 0; i < arr.size(); i++) {
-        setCursorPosition(startX + i * spacing, startY);
-        cout << arr[i];
-    }
+    int columns = static_cast<int>(arr.size()), startX = 36, startY = 7, spacing = 15;
 
-    string from, input, to;
     bool stop = false;
-    double amount;
     while (!stop) {
-        for (int y = 12; y <= 17; y++) {
-            setCursorPosition(25, y);
-            cout << "                                             ";
+        clearScreen();  // wipe the input/output area like in length()
+
+        // Print header, centered at y=5, xStart=36
+        cout << RED;
+        printCentered("Temperature", 5);
+        cout << YELLOW;
+
+        // Print unit options
+        for (int i = 0; i < columns; i++) {
+            setCursorPosition(40 + i * spacing, startY);
+            cout << arr[i];
         }
-        setCursorPosition(25, 12);
+
+        string from, input, to;
+        double amount;
+
+        // Prompt and input amount
+        setCursorPosition(startX, 12);
         cout << YELLOW "Enter amount: " GREEN;
         cin >> input;
         try {
             amount = stod(input);
         }
-        catch (const invalid_argument& e) {
-            setCursorPosition(25, 17);
-            cout << RED "Invalid input. Type a number.";
+        catch (const invalid_argument&) {
+            setCursorPosition(startX, 17);
+            cout << RED "Invalid input. Type a number." RESET;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin.get(); cin.get();
             continue;
         }
-        setCursorPosition(25, 13);
+
+        // Prompt and input 'from' unit
+        setCursorPosition(startX, 13);
         cout << YELLOW "Convert from (enter unit): " GREEN;
         cin >> from;
-        setCursorPosition(25, 14);
+
+        // Prompt and input 'to' unit
+        setCursorPosition(startX, 14);
         cout << YELLOW "Convert to (enter unit): " GREEN;
         cin >> to;
+
+        // Normalize input to lowercase
         transform(from.begin(), from.end(), from.begin(), ::tolower);
         transform(to.begin(), to.end(), to.begin(), ::tolower);
 
-        setCursorPosition(25, 16);
+        // Perform conversion and display result
+        setCursorPosition(startX, 16);
         cout << GREEN;
+
         if ((from == "celsius" || from == "c") && (to == "fahrenheit" || to == "f")) {
-            cout << amount << "°C = " << fixed << setprecision(2)
-                << celsiusFahrenheitConverter(amount, true) << "°F";
+            cout << amount << " C = " << fixed << setprecision(2)
+                << celsiusFahrenheitConverter(amount, true) << " F";
             stop = true;
         }
         else if ((from == "fahrenheit" || from == "f") && (to == "celsius" || to == "c")) {
-            cout << amount << "°F = " << fixed << setprecision(2)
-                << celsiusFahrenheitConverter(amount, false) << "°C";
+            cout << amount << " F = " << fixed << setprecision(2)
+                << celsiusFahrenheitConverter(amount, false) << " C";
             stop = true;
         }
         else if ((from == "celsius" || from == "c") && (to == "kelvin" || to == "k")) {
-            cout << amount << "°C = " << fixed << setprecision(2)
+            cout << amount << " C = " << fixed << setprecision(2)
                 << celsiusKelvinConverter(amount, true) << "K";
             stop = true;
         }
         else if ((from == "kelvin" || from == "k") && (to == "celsius" || to == "c")) {
             cout << amount << "K = " << fixed << setprecision(2)
-                << celsiusKelvinConverter(amount, false) << "°C";
+                << celsiusKelvinConverter(amount, false) << " C";
             stop = true;
         }
         else if ((from == "fahrenheit" || from == "f") && (to == "kelvin" || to == "k")) {
-            cout << amount << "°F = " << fixed << setprecision(2)
+            cout << amount << " F = " << fixed << setprecision(2)
                 << fahrenheitKelvinConverter(amount, true) << "K";
             stop = true;
         }
         else if ((from == "kelvin" || from == "k") && (to == "fahrenheit" || to == "f")) {
             cout << amount << "K = " << fixed << setprecision(2)
-                << fahrenheitKelvinConverter(amount, false) << "°F";
+                << fahrenheitKelvinConverter(amount, false) << " F";
             stop = true;
         }
         else {
-            setCursorPosition(25, 17);
+            setCursorPosition(startX, 17);
             cout << RED "Invalid input. Try again" RESET;
             cin.get(); cin.get();
         }
+
         if (stop) {
-            setCursorPosition(25, 17);
-            cout << YELLOW "Press any key to continue...";
+            setCursorPosition(startX, 17);
+            cout << YELLOW "Press any key to continue..." RESET;
             cin.get(); cin.get();
         }
     }
 }
 
-void area() {
-    // Clear header area and display heading
-    for (int i = 0; i < 49; i++) {
-        setCursorPosition(25 + i, 5); cout << " ";
-        setCursorPosition(25 + i, 6); cout << " ";
-    }
-    setCursorPosition(47, 5);
-    cout << YELLOW "Area";
-    setCursorPosition(25, 14);
-    cout << "                                             ";
-
+void Measurement::area() {
     vector<string> arr = { "Sqr. Meter", "Sqr. Kilometer", "Sqr. Mile", "Sqr. Foot", "Acre" };
-    int columns = 3, rows = 2, startX = 25, startY = 7, spacing = 18;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-            int index = i * columns + j;
-            if (index < arr.size()) {
-                setCursorPosition(startX + j * spacing, startY + i);
-                cout << arr[index];
+    int columns = 3, rows = 2, startX = 36, startY = 7, spacing = 18;
+
+    bool stop = false;
+    while (!stop) {
+        clearScreen();  // Clear input/output area same as length()
+
+        // Print header, centered at y=5
+        cout << RED;
+        printCentered("Area", 5);
+        cout << YELLOW;
+
+        // Print unit options in 2 rows, 3 columns max
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                int index = i * columns + j;
+                if (index < arr.size()) {
+                    setCursorPosition(startX + j * spacing, startY + i);
+                    cout << arr[index];
+                }
             }
         }
-    }
 
-    string from, input, to;
-    bool stop = false;
-    double amount;
-    while (!stop) {
-        for (int y = 12; y <= 17; y++) {
-            setCursorPosition(25, y);
-            cout << "                                             ";
-        }
-        setCursorPosition(25, 12);
+        string from, input, to;
+        double amount;
+
+        // Prompt for amount
+        setCursorPosition(startX, 12);
         cout << YELLOW "Enter amount: " GREEN;
         cin >> input;
         try {
             amount = stod(input);
         }
-        catch (const invalid_argument& e) {
-            setCursorPosition(25, 17);
-            cout << RED "Invalid input. Type a number.";
+        catch (const invalid_argument&) {
+            setCursorPosition(startX, 17);
+            cout << RED "Invalid input. Type a number." RESET;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin.get(); cin.get();
             continue;
         }
-        setCursorPosition(25, 13);
+
+        // Prompt for 'from' unit
+        setCursorPosition(startX, 13);
         cout << YELLOW "Convert from (enter unit): " GREEN;
         cin >> from;
-        setCursorPosition(25, 14);
+
+        // Prompt for 'to' unit
+        setCursorPosition(startX, 14);
         cout << YELLOW "Convert to (enter unit): " GREEN;
         cin >> to;
+
+        // Normalize inputs to lowercase
         transform(from.begin(), from.end(), from.begin(), ::tolower);
         transform(to.begin(), to.end(), to.begin(), ::tolower);
-        setCursorPosition(25, 16);
+
+        setCursorPosition(startX, 16);
         cout << GREEN;
-        // Example branch: Sqr. Meter <-> Sqr. Kilometer
-        if ((from == "sqr. meter" || from == "sqm" || from == "square meter") &&
-            (to == "sqr. kilometer" || to == "sqkm" || to == "square kilometer")) {
-            cout << amount << " sqm = " << fixed << setprecision(2)
-                << sqmToSqkmConverter(amount, true) << " sqkm";
+
+        // Conversion pairs (area units)
+
+        // For convenience, define shorthand checks:
+        auto isFrom = [&](const vector<string>& options) {
+            return find(options.begin(), options.end(), from) != options.end();
+            };
+        auto isTo = [&](const vector<string>& options) {
+            return find(options.begin(), options.end(), to) != options.end();
+            };
+
+        // Unit groups with possible input strings
+        vector<string> sqmUnits = { "sqr. meter", "sqm", "square meter", "square meters" };
+        vector<string> sqkmUnits = { "sqr. kilometer", "sqkm", "square kilometer", "square kilometers" };
+        vector<string> sqmiUnits = { "sqr. mile", "sqmi", "square mile", "square miles" };
+        vector<string> sqftUnits = { "sqr. foot", "sqft", "square foot", "square feet" };
+        vector<string> acreUnits = { "acre", "acres" };
+
+        // Now check all combinations and convert accordingly
+        // Conversions between sqm and others
+        if (isFrom(sqmUnits) && isTo(sqkmUnits)) {
+            cout << amount << " sqm = " << fixed << setprecision(4) << sqmToSqkm(amount) << " sqkm";
             stop = true;
         }
-        else if ((from == "sqr. kilometer" || from == "sqkm" || from == "square kilometer") &&
-            (to == "sqr. meter" || to == "sqm" || to == "square meter")) {
-            cout << amount << " sqkm = " << fixed << setprecision(2)
-                << sqmToSqkmConverter(amount, false) << " sqm";
+        else if (isFrom(sqkmUnits) && isTo(sqmUnits)) {
+            cout << amount << " sqkm = " << fixed << setprecision(4) << sqkmToSqm(amount) << " sqm";
             stop = true;
         }
-        // Add additional branches for Sqr. Mile, Sqr. Foot, and Acre conversions similarly...
+        else if (isFrom(sqmUnits) && isTo(sqmiUnits)) {
+            cout << amount << " sqm = " << fixed << setprecision(4) << sqmToSqmi(amount) << " sqmi";
+            stop = true;
+        }
+        else if (isFrom(sqmiUnits) && isTo(sqmUnits)) {
+            cout << amount << " sqmi = " << fixed << setprecision(4) << sqmiToSqm(amount) << " sqm";
+            stop = true;
+        }
+        else if (isFrom(sqmUnits) && isTo(sqftUnits)) {
+            cout << amount << " sqm = " << fixed << setprecision(4) << sqmToSqft(amount) << " sqft";
+            stop = true;
+        }
+        else if (isFrom(sqftUnits) && isTo(sqmUnits)) {
+            cout << amount << " sqft = " << fixed << setprecision(4) << sqftToSqm(amount) << " sqm";
+            stop = true;
+        }
+        else if (isFrom(sqmUnits) && isTo(acreUnits)) {
+            cout << amount << " sqm = " << fixed << setprecision(4) << sqmToAcre(amount) << " acres";
+            stop = true;
+        }
+        else if (isFrom(acreUnits) && isTo(sqmUnits)) {
+            cout << amount << " acres = " << fixed << setprecision(4) << acreToSqm(amount) << " sqm";
+            stop = true;
+        }
+
+        // Convert between sqkm and others (except sqm handled above)
+        else if (isFrom(sqkmUnits) && isTo(sqmiUnits)) {
+            cout << amount << " sqkm = " << fixed << setprecision(4) << sqkmToSqmi(amount) << " sqmi";
+            stop = true;
+        }
+        else if (isFrom(sqmiUnits) && isTo(sqkmUnits)) {
+            cout << amount << " sqmi = " << fixed << setprecision(4) << sqmiToSqkm(amount) << " sqkm";
+            stop = true;
+        }
+        else if (isFrom(sqkmUnits) && isTo(sqftUnits)) {
+            cout << amount << " sqkm = " << fixed << setprecision(4) << sqkmToSqft(amount) << " sqft";
+            stop = true;
+        }
+        else if (isFrom(sqftUnits) && isTo(sqkmUnits)) {
+            cout << amount << " sqft = " << fixed << setprecision(4) << sqftToSqkm(amount) << " sqkm";
+            stop = true;
+        }
+        else if (isFrom(sqkmUnits) && isTo(acreUnits)) {
+            cout << amount << " sqkm = " << fixed << setprecision(4) << sqkmToAcre(amount) << " acres";
+            stop = true;
+        }
+        else if (isFrom(acreUnits) && isTo(sqkmUnits)) {
+            cout << amount << " acres = " << fixed << setprecision(4) << acreToSqkm(amount) << " sqkm";
+            stop = true;
+        }
+
+        // Convert between sqmi and others (except sqm and sqkm handled above)
+        else if (isFrom(sqmiUnits) && isTo(sqftUnits)) {
+            cout << amount << " sqmi = " << fixed << setprecision(4) << sqmiToSqft(amount) << " sqft";
+            stop = true;
+        }
+        else if (isFrom(sqftUnits) && isTo(sqmiUnits)) {
+            cout << amount << " sqft = " << fixed << setprecision(4) << sqftToSqmi(amount) << " sqmi";
+            stop = true;
+        }
+        else if (isFrom(sqmiUnits) && isTo(acreUnits)) {
+            cout << amount << " sqmi = " << fixed << setprecision(4) << sqmiToAcre(amount) << " acres";
+            stop = true;
+        }
+        else if (isFrom(acreUnits) && isTo(sqmiUnits)) {
+            cout << amount << " acres = " << fixed << setprecision(4) << acreToSqmi(amount) << " sqmi";
+            stop = true;
+        }
+
+        // Convert between sqft and acres
+        else if (isFrom(sqftUnits) && isTo(acreUnits)) {
+            cout << amount << " sqft = " << fixed << setprecision(4) << sqftToAcre(amount) << " acres";
+            stop = true;
+        }
+        else if (isFrom(acreUnits) && isTo(sqftUnits)) {
+            cout << amount << " acres = " << fixed << setprecision(4) << acreToSqft(amount) << " sqft";
+            stop = true;
+        }
         else {
-            setCursorPosition(25, 17);
+            setCursorPosition(startX, 17);
             cout << RED "Invalid input. Try again" RESET;
             cin.get(); cin.get();
         }
+
         if (stop) {
-            setCursorPosition(25, 17);
-            cout << YELLOW "Press any key to continue...";
+            setCursorPosition(startX, 17);
+            cout << YELLOW "Press any key to continue..." RESET;
             cin.get(); cin.get();
         }
     }
 }
 
-void volume() {
-    // Clear header area and display heading
-    for (int i = 0; i < 49; i++) {
-        setCursorPosition(25 + i, 5); cout << " ";
-        setCursorPosition(25 + i, 6); cout << " ";
-    }
-    setCursorPosition(47, 5);
-    cout << YELLOW "Volume";
-    setCursorPosition(25, 14);
-    cout << "                                             ";
 
-    vector<string> arr = { "Cubic Meter", "Cubic Kilometer", "Liter", "Milliliter", "US Gallon", "US Pint" };
-    int columns = 3, rows = 2, startX = 25, startY = 7, spacing = 16;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-            int index = i * columns + j;
-            if (index < arr.size()) {
-                setCursorPosition(startX + j * spacing, startY + i);
-                cout << arr[index];
-            }
-        }
-    }
-
-    string from, input, to;
+void Measurement::volume() {
     bool stop = false;
     double amount;
+
     while (!stop) {
-        for (int y = 12; y <= 17; y++) {
-            setCursorPosition(25, y);
-            cout << "                                             ";
+        cout << RED;
+        printCentered("Volume", 5);
+        cout << YELLOW;
+
+        vector<string> arr = { "Cubic Meter", "Cubic Kilometer", "Liter", "Milliliter", "US Gallon", "US Pint" };
+        int columns = 3, rows = 2, startX = 36, startY = 7, spacing = 18;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                int index = i * columns + j;
+                if (index < arr.size()) {
+                    setCursorPosition(startX + j * spacing, startY + i);
+                    cout << arr[index];
+                }
+            }
         }
-        setCursorPosition(25, 12);
+
+        string from, input, to;
+
+        setCursorPosition(36, 12);
         cout << YELLOW "Enter amount: " GREEN;
         cin >> input;
         try {
             amount = stod(input);
         }
         catch (const invalid_argument& e) {
-            setCursorPosition(25, 17);
-            cout << RED "Invalid input. Type a number.";
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            setCursorPosition(36, 17);
+            cout << RED "Invalid input. Type a number." RESET;
             cin.get(); cin.get();
             continue;
         }
-        setCursorPosition(25, 13);
+
+        setCursorPosition(36, 13);
         cout << YELLOW "Convert from (enter unit): " GREEN;
         cin >> from;
-        setCursorPosition(25, 14);
+
+        setCursorPosition(36, 14);
         cout << YELLOW "Convert to (enter unit): " GREEN;
         cin >> to;
+
         transform(from.begin(), from.end(), from.begin(), ::tolower);
         transform(to.begin(), to.end(), to.begin(), ::tolower);
-        setCursorPosition(25, 16);
+
+        setCursorPosition(36, 16);
         cout << GREEN;
-        // Example branch: Cubic Meter <-> Liter
-        if ((from == "cubic meter" || from == "m3") &&
-            (to == "liter" || to == "l")) {
-            cout << amount << " m3 = " << fixed << setprecision(2)
-                << m3ToLiterConverter(amount, true) << " L";
-            stop = true;
-        }
-        else if ((from == "liter" || from == "l") &&
-            (to == "cubic meter" || to == "m3")) {
-            cout << amount << " L = " << fixed << setprecision(2)
-                << m3ToLiterConverter(amount, false) << " m3";
-            stop = true;
-        }
-        // Add additional branches for Cubic Kilometer, Milliliter, US Gallon, and US Pint conversions...
-        else {
-            setCursorPosition(25, 17);
-            cout << RED "Invalid input. Try again" RESET;
+
+        double liters = toLiters(amount, from);
+        if (liters < 0) {
+            setCursorPosition(36, 17);
+            cout << RED "Invalid 'from' unit." RESET;
             cin.get(); cin.get();
+            clearScreen();
+            continue;
         }
-        if (stop) {
-            setCursorPosition(25, 17);
-            cout << YELLOW "Press any key to continue...";
+
+        double result = fromLiters(liters, to);
+        if (result < 0) {
+            setCursorPosition(36, 17);
+            cout << RED "Invalid 'to' unit." RESET;
             cin.get(); cin.get();
+            clearScreen();
+            continue;
         }
+
+        cout << amount << " " << from << " = " << fixed << setprecision(4) << result << " " << to;
+
+        stop = true;
+
+        setCursorPosition(36, 17);
+        cout << YELLOW "Press any key to continue...";
+        cin.get(); cin.get();
     }
 }
 
-void weight() {
-    // Clear header area and display heading
-    for (int i = 0; i < 49; i++) {
-        setCursorPosition(25 + i, 5); cout << " ";
-        setCursorPosition(25 + i, 6); cout << " ";
-    }
-    setCursorPosition(47, 5);
-    cout << YELLOW "Weight";
-    setCursorPosition(25, 14);
-    cout << "                                             ";
 
-    vector<string> arr = { "Kilogram", "Gram", "Milligram", "Pound", "Ounce" };
-    int columns = 3, rows = 2, startX = 25, startY = 7, spacing = 16;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-            int index = i * columns + j;
-            if (index < arr.size()) {
-                setCursorPosition(startX + j * spacing, startY + i);
-                cout << arr[index];
-            }
-        }
-    }
-
-    string from, input, to;
+void Measurement::weight() {
     bool stop = false;
     double amount;
+
     while (!stop) {
-        for (int y = 12; y <= 17; y++) {
-            setCursorPosition(25, y);
-            cout << "                                             ";
+        cout << RED; 
+        printCentered("Weight", 5);
+        cout << YELLOW;
+
+        vector<string> arr = { "Kilogram", "Gram", "Milligram", "Pound", "Ounce" };
+        int columns = 3, rows = 2, startX = 36, startY = 7, spacing = 18;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                int index = i * columns + j;
+                if (index < arr.size()) {
+                    setCursorPosition(startX + j * spacing, startY + i);
+                    cout << arr[index];
+                }
+            }
         }
-        setCursorPosition(25, 12);
+
+        string from, input, to;
+
+        setCursorPosition(36, 12);
         cout << YELLOW "Enter amount: " GREEN;
         cin >> input;
         try {
             amount = stod(input);
         }
         catch (const invalid_argument& e) {
-            setCursorPosition(25, 17);
-            cout << RED "Invalid input. Type a number.";
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            setCursorPosition(36, 17);
+            cout << RED "Invalid input. Type a number." RESET;
             cin.get(); cin.get();
+            clearScreen();
             continue;
         }
-        setCursorPosition(25, 13);
+
+        setCursorPosition(36, 13);
         cout << YELLOW "Convert from (enter unit): " GREEN;
         cin >> from;
-        setCursorPosition(25, 14);
+
+        setCursorPosition(36, 14);
         cout << YELLOW "Convert to (enter unit): " GREEN;
         cin >> to;
+
         transform(from.begin(), from.end(), from.begin(), ::tolower);
         transform(to.begin(), to.end(), to.begin(), ::tolower);
-        setCursorPosition(25, 16);
+
+        setCursorPosition(36, 16);
         cout << GREEN;
-        // Example branch: Kilogram <-> Gram
-        if ((from == "kilogram" || from == "kg") &&
-            (to == "gram" || to == "g")) {
-            cout << amount << " kg = " << fixed << setprecision(2)
-                << kgToGramConverter(amount, true) << " g";
-            stop = true;
-        }
-        else if ((from == "gram" || from == "g") &&
-            (to == "kilogram" || to == "kg")) {
-            cout << amount << " g = " << fixed << setprecision(2)
-                << kgToGramConverter(amount, false) << " kg";
-            stop = true;
-        }
-        // Add additional branches for Milligram, Pound, and Ounce conversions...
-        else {
-            setCursorPosition(25, 17);
-            cout << RED "Invalid input. Try again" RESET;
+
+        double kilograms = toKilograms(amount, from);
+        if (kilograms < 0) {
+            setCursorPosition(36, 17);
+            cout << RED "Invalid 'from' unit." RESET;
             cin.get(); cin.get();
+            clearScreen();
+            continue;
         }
-        if (stop) {
-            setCursorPosition(25, 17);
-            cout << YELLOW "Press any key to continue...";
+
+        double result = fromKilograms(kilograms, to);
+        if (result < 0) {
+            setCursorPosition(36, 17);
+            cout << RED "Invalid 'to' unit." RESET;
             cin.get(); cin.get();
+            clearScreen();
+            continue;
         }
+
+        cout << amount << " " << from << " = " << fixed << setprecision(4) << result << " " << to;
+
+        stop = true;
+
+        setCursorPosition(36, 17);
+        cout << YELLOW "Press any key to continue...";
+        cin.get(); cin.get();
     }
 }
 
-void timeConv() {
-    // (Renamed function as time() conflicts with std::time)
-    for (int i = 0; i < 49; i++) {
-        setCursorPosition(25 + i, 5); cout << " ";
-        setCursorPosition(25 + i, 6); cout << " ";
-    }
-    setCursorPosition(47, 5);
-    cout << YELLOW "Time";
-    setCursorPosition(25, 14);
-    cout << "                                             ";
+void Measurement::timeConv() {
 
-    vector<string> arr = { "Second", "Minute", "Hour", "Day" };
-    int columns = 4, startX = 25, startY = 7, spacing = 12;
-    for (int i = 0; i < arr.size(); i++) {
-        setCursorPosition(startX + i * spacing, startY);
-        cout << arr[i];
-    }
-
-    string from, input, to;
     bool stop = false;
     double amount;
+
     while (!stop) {
-        for (int y = 12; y <= 17; y++) {
-            setCursorPosition(25, y);
-            cout << "                                             ";
+        setCursorPosition(47, 3);
+        cout << RED;
+        printCentered("Time", 5);
+        cout << YELLOW;
+
+        vector<string> arr = { "Second", "Minute", "Hour", "Day" };
+        int spacing = 12, startX = 40, startY = 7;
+        for (int i = 0; i < arr.size(); i++) {
+            setCursorPosition(startX + i * spacing, startY);
+            cout << arr[i];
         }
-        setCursorPosition(25, 12);
+
+        string from, input, to;
+
+        setCursorPosition(36, 10);
         cout << YELLOW "Enter amount: " GREEN;
         cin >> input;
+
         try {
             amount = stod(input);
         }
         catch (const invalid_argument& e) {
-            setCursorPosition(25, 17);
-            cout << RED "Invalid input. Type a number.";
+            setCursorPosition(36, 16);
+            cout << RED "Invalid input. Type a number." RESET;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin.get(); cin.get();
+            clearScreen();
             continue;
         }
-        setCursorPosition(25, 13);
+
+        setCursorPosition(36, 11);
         cout << YELLOW "Convert from (enter unit): " GREEN;
         cin >> from;
-        setCursorPosition(25, 14);
+
+        setCursorPosition(36, 12);
         cout << YELLOW "Convert to (enter unit): " GREEN;
         cin >> to;
+
         transform(from.begin(), from.end(), from.begin(), ::tolower);
         transform(to.begin(), to.end(), to.begin(), ::tolower);
-        setCursorPosition(25, 16);
+
+        setCursorPosition(36, 14);
         cout << GREEN;
-        // Example branch: Second <-> Minute
-        if ((from == "second" || from == "s") &&
-            (to == "minute" || to == "min")) {
+
+        // Conversion logic unchanged...
+
+        if ((from == "second" || from == "s") && (to == "minute" || to == "min")) {
             cout << amount << " s = " << fixed << setprecision(2)
                 << secToMinConverter(amount, true) << " min";
             stop = true;
         }
-        else if ((from == "minute" || from == "min") &&
-            (to == "second" || to == "s")) {
+        else if ((from == "minute" || from == "min") && (to == "second" || to == "s")) {
             cout << amount << " min = " << fixed << setprecision(2)
                 << secToMinConverter(amount, false) << " s";
             stop = true;
         }
-        else if ((from == "second" || from == "s") &&
-            (to == "hour" || to == "h")) {
+        else if ((from == "second" || from == "s") && (to == "hour" || to == "hr")) {
             cout << amount << " s = " << fixed << setprecision(2)
-                << secToHourConverter(amount, true) << " h";
+                << secToHourConverter(amount, true) << " hr";
             stop = true;
         }
-        else if ((from == "hour" || from == "h") &&
-            (to == "second" || to == "s")) {
-            cout << amount << " h = " << fixed << setprecision(2)
+        else if ((from == "hour" || from == "hr") && (to == "second" || to == "s")) {
+            cout << amount << " hr = " << fixed << setprecision(2)
                 << secToHourConverter(amount, false) << " s";
             stop = true;
         }
-        else if ((from == "second" || from == "s") &&
-            (to == "day" || to == "d")) {
+        else if ((from == "second" || from == "s") && (to == "day" || to == "d")) {
             cout << amount << " s = " << fixed << setprecision(2)
                 << secToDayConverter(amount, true) << " d";
             stop = true;
         }
-        else if ((from == "day" || from == "d") &&
-            (to == "second" || to == "s")) {
+        else if ((from == "day" || from == "d") && (to == "second" || to == "s")) {
             cout << amount << " d = " << fixed << setprecision(2)
                 << secToDayConverter(amount, false) << " s";
             stop = true;
         }
-        
+        else if ((from == "minute" || from == "min") && (to == "hour" || to == "hr")) {
+            cout << amount << " min = " << fixed << setprecision(2)
+                << minToHourConverter(amount, true) << " hr";
+            stop = true;
+        }
+        else if ((from == "hour" || from == "hr") && (to == "minute" || to == "min")) {
+            cout << amount << " hr = " << fixed << setprecision(2)
+                << minToHourConverter(amount, false) << " min";
+            stop = true;
+        }
+        else if ((from == "minute" || from == "min") && (to == "day" || to == "d")) {
+            cout << amount << " min = " << fixed << setprecision(4)
+                << minToDayConverter(amount, true) << " d";
+            stop = true;
+        }
+        else if ((from == "day" || from == "d") && (to == "minute" || to == "min")) {
+            cout << amount << " d = " << fixed << setprecision(2)
+                << minToDayConverter(amount, false) << " min";
+            stop = true;
+        }
+        else if ((from == "hour" || from == "hr") && (to == "day" || to == "d")) {
+            cout << amount << " hr = " << fixed << setprecision(4)
+                << hourToDayConverter(amount, true) << " d";
+            stop = true;
+        }
+        else if ((from == "day" || from == "d") && (to == "hour" || to == "hr")) {
+            cout << amount << " d = " << fixed << setprecision(2)
+                << hourToDayConverter(amount, false) << " hr";
+            stop = true;
+        }
         else {
-            setCursorPosition(25, 17);
+            setCursorPosition(36, 16);
             cout << RED "Invalid input. Try again" RESET;
             cin.get(); cin.get();
         }
+
         if (stop) {
-            setCursorPosition(25, 17);
-            cout << YELLOW "Press any key to continue...";
+            setCursorPosition(36, 16);
+            cout << YELLOW "Press any key to continue..." RESET;
             cin.get(); cin.get();
         }
     }
 }
 
-void Measurement::runUnitConverter() {
-    while (true) {
-        for (int i = 0; i < 49; i++) {
-            setCursorPosition(25 + i, 7);
-            cout << " ";
-            setCursorPosition(25 + i, 8);
-            cout << " ";
-        }
-        for (int y = 12; y <= 17; y++) {
-            setCursorPosition(25, y);
-            cout << "                                             ";
-        }
-        switch (mainMenu()) {
-        case 1:
-            length();
-            break;
-        case 2:
-            temperature();
-            break;
-        case 3:
-            area();
-            break;
-        case 4:
-            volume();
-            break;
-        case 5:
-            weight();
-            break;
-        case 6:
-            timeConv();
-            break;
-        case 0:
-            break;
-        default:
-            break;
-        }
-    }
-}

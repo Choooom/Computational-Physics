@@ -28,10 +28,11 @@ FrictionalForce::FrictionalForce() {
 void FrictionalForce::runFrictionalForce() {
 
 	while (true) {
+        clearScreen();
 		setCursorPosition(52, 4);
 		cout << RED "FRICTIONAL FORCE" RESET;
 
-		vector<string> arr = { "1.) Force of Kinetic Friction", "2.) Coefficient of Kinetic Friction", "3.) Normal Friction", "4,) With Angle"};
+		vector<string> arr = { "1.) Force of Kinetic Friction", "2.) Coefficient of Kinetic Friction", "3,) With Angle"};
 		string choice;
 
 		setCursorPosition(38, 6);
@@ -64,6 +65,16 @@ void FrictionalForce::runFrictionalForce() {
 
             Angle();
         }
+        else if (choice == "exit") {
+            clearScreen();
+            break;
+        }
+        else {
+            setCursorPosition(35, 16);
+            cout << RED "Invalid input. Please enter a valid number." << endl;
+            cin.get();
+            clearScreen();
+        }
 	}
 		
 }
@@ -74,6 +85,10 @@ void FrictionalForce::Force() {
         double mass, coefficient, force;
 
         while (true) {
+            cout << RED;
+            printCentered("Force of Kinetic Friction", 5);
+            cout << YELLOW;
+
             setCursorPosition(35, 9);
             cout << YELLOW "Enter mass(kg): " GREEN;
             cin >> mass;
@@ -147,6 +162,10 @@ void FrictionalForce::Coefficient() {
         double mass, acceleration, normal, friction, force;
 
         while (true) {
+            cout << RED;
+            printCentered("Coefficient of Kinetic Friction", 5);
+            cout << YELLOW;
+
             setCursorPosition(35, 9);
             cout << YELLOW "Enter mass(kg): " GREEN;
             cin >> mass;
@@ -225,6 +244,10 @@ void FrictionalForce::Angle() {
         double M_PI = 3.14159265358979323846;
 
         while (true) {
+            cout << RED;
+            printCentered("With Angle", 5);
+            cout << YELLOW;
+
             setCursorPosition(35, 9);
             cout << YELLOW "Enter mass(kg): " GREEN;
             cin >> mass;

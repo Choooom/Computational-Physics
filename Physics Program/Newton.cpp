@@ -57,6 +57,16 @@ void Newton::runNewton() {
 
             Different();
         }
+        else if (choice == "exit") {
+            clearScreen();
+            break;
+        }
+        else {
+            setCursorPosition(35, 16);
+            cout << RED "Invalid input. Please enter a valid number." << endl;
+            cin.get();
+            clearScreen();
+        }
     }
 
 }
@@ -67,6 +77,10 @@ void Newton::Similar() {
         double weight, acceleration, newton;
 
         while (true) {
+            clearScreen();
+            cout << RED;
+            printCentered("Similar Direction", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter Weight(N): " GREEN;
             cin >> newton;
@@ -133,6 +147,10 @@ void Newton::Different(){
         double weight, acceleration, newton;
 
         while (true) {
+            clearScreen();
+            cout << RED;
+            printCentered("Different Direction", 5);
+            cout << YELLOW;
             setCursorPosition(35, 9);
             cout << YELLOW "Enter Weight(N): " GREEN;
             cin >> newton;
