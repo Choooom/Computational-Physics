@@ -45,6 +45,9 @@
     <ClCompile Include="Temperature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Motion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleUtils.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Temperature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Motion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

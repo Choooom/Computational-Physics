@@ -134,6 +134,7 @@
     <ClCompile Include="Kinematics.cpp" />
     <ClCompile Include="Measurement.cpp" />
     <ClCompile Include="Momentum.cpp" />
+    <ClCompile Include="Motion.cpp" />
     <ClCompile Include="Newton.cpp" />
     <ClCompile Include="Physics Program.cpp" />
     <ClCompile Include="Temperature.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Kinematics.h" />
     <ClInclude Include="Measurement.h" />
     <ClInclude Include="Momentum.h" />
+    <ClInclude Include="Motion.h" />
     <ClInclude Include="Newton.h" />
     <ClInclude Include="Temperature.h" />
     <ClInclude Include="Vectors.h" />
